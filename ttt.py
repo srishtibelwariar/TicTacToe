@@ -35,28 +35,94 @@ Builder.load_string("""
             on_press: app.stop()
         Button:
             text: 'Start'
-            on_press: root.manager.current = 'game'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'game'
 
 <GameScreen>:
+    canvas:
+        Rectangle:
+            pos: 2*self.width /9,0
+            size: 10, self.height
+        Rectangle:
+            pos: 4*self.width /9, 0
+            size: 10, self.height
+        Rectangle:
+            pos: 2*self.width /3, 0
+            size: 2, self.height
+        Rectangle:
+            pos: 0, self.height/3
+            size: 2*self.width/3, 10
+        
+        Rectangle:
+            pos: 0, 2*self.height/3
+            size: 2*self.width/3, 10
+        
     GridLayout:
-        canvas:
-            Rectangle:
-                pos: 2*self.width /9,0
-                size: 10, self.height
-            Rectangle:
-                pos: 4*self.width /9, 0
-                size: 10, self.height
-            Rectangle:
-                pos: 2*self.width /3, 0
-                size: 2, self.height
-            Rectangle:
-                pos: 0, self.height/3
-                size: 2*self.width/3, 10
-            
-            Rectangle:
-                pos: 0, 2*self.height/3
-                size: 2*self.width/3, 10
+        
+        Button:
+            text:"0"
+            size: 2*root.width/9, root.height/3
+            pos: 0, 2*root.height/3+10
+            id: 0
+        Button:
+            text:"1"
+            size: 2*root.width/9 -10, root.height/3
+            pos: 2*root.width/9 +10, 2*root.height/3+10
+            id: 1
     
+        Button:
+            text:"2"
+            size: 2*root.width/9 -10, root.height/3
+            pos: 4*root.width/9+10, 2*root.height/3+10
+            id: 2
+            
+        Button:
+            text:"3"
+            size: 2*root.width/9, root.height/3 -10
+            pos: 0, 1*root.height/3+10
+            id: 3
+        Button:
+            text:"4"
+            size: 2*root.width/9 -10, root.height/3 -10
+            pos: 2*root.width/9 +10, 1*root.height/3+10
+            id: 4
+    
+        Button:
+            text:"5"
+            size: 2*root.width/9 -10, root.height/3 -10
+            pos: 4*root.width/9+10, 1*root.height/3+10
+            id: 5
+        
+        
+        Button:
+            text:"6"
+            size: 2*root.width/9 , root.height/3
+            pos: 0, 0
+            id: 6
+        Button:
+            text:"7"
+            size: 2*root.width/9 -10 , root.height/3
+            pos: 2*root.width/9 +10, 0
+            id: 7
+        Button:
+            text:"8"
+            size: 2*root.width/9 -10, root.height/3
+            pos: 4*root.width/9+10, 0
+            id: 8
+        Button:
+            text:"Home Menu"
+            size: 200, 200
+            pos: 7*root.width/9+10, 240
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+            
+        Button:
+            text:"Quit Game"
+            size: 200, 200
+            pos: 7*root.width/9+10, 20
+            on_press: app.stop()
 """)
 
 class MenuScreen(Screen):
