@@ -1,0 +1,136 @@
+#:kivy 1.0.9
+
+<TTTTile>:
+    Button:
+        text: root.name
+        font_size: '70sp'
+        pos: root.pos
+        size: root.size
+        on_press: root.new()
+
+<TTTGame>:
+    canvas:
+        Rectangle:
+            pos: 2*self.width /9,0
+            size: 10, self.height
+        Rectangle:
+            pos: 4*self.width /9, 0
+            size: 10, self.height
+        Rectangle:
+            pos: 2*self.width /3, 0
+            size: 2, self.height
+        Rectangle:
+            pos: 0, self.height/3
+            size: 2*self.width/3, 10
+        Rectangle:
+            pos: 0, 2*self.height/3
+            size: 2*self.width/3, 10      
+    TTTTile:
+        id: t0
+        size: 2*self.parent.width/9, self.parent.height/3
+        pos: 0, 2*root.height/3+10
+    TTTTile:
+        id: t1
+        size: 2*self.parent.width/9 -10, self.parent.height/3
+        pos: 2*root.width/9 +10, 2*root.height/3+10
+    TTTTile:
+        id: t2
+        size: 2*self.parent.width/9 -10, self.parent.height/3
+        pos: 4*root.width/9+10, 2*root.height/3+10
+    TTTTile:
+        id: t3
+        size: 2*self.parent.width/9, self.parent.height/3 -10
+        pos: 0, 1*root.height/3+10
+    TTTTile:
+        id: t4
+        size: 2*self.parent.width/9 -10, self.parent.height/3 -10
+        pos: 2*root.width/9 +10, 1*root.height/3+10
+    TTTTile:
+        id: t5
+        size: 2*self.parent.width/9 -10, self.parent.height/3 -10
+        pos: 4*root.width/9+10, 1*root.height/3+10
+    TTTTile:
+        id: t6
+        size: 2*self.parent.width/9, self.parent.height/3
+        pos: 0, 0
+    TTTTile:
+        id: t7
+        size: 2*self.parent.width/9 -10, self.parent.height/3
+        pos: 2*root.width/9 +10, 0
+    TTTTile:
+        id: t8
+        size: 2*self.parent.width/9 -10, self.parent.height/3
+        pos: 4*root.width/9+10, 0
+
+<Manager>:
+    id: screen_manager
+    
+    Screen:
+        name: 'main'
+        GridLayout:
+            cols: 2
+            GridLayout:
+                rows: 2
+                Label:
+                    text: '3x3 Tic Tac Toe'
+                    font_size: '40sp'
+                Label:
+                    text: 'Please select game type and click start'
+                    valign: 'middle'
+            GridLayout:
+                rows:3
+                ToggleButton:
+                    text: 'Human vs Human'
+                    group: 'player'
+                    state: 'down'
+                ToggleButton:
+                    text: 'Human vs Random Computer'
+                    group: 'player'
+                ToggleButton:
+                    text: 'Human vs Smart Computer'
+                    group: 'player'
+            Button:
+                text: 'Quit'
+                on_press: app.stop()
+            Button:
+                text: 'Start'
+                on_press:
+                    root.transition.direction = 'left'
+                    root.current = 'game'
+
+    Screen:
+        name: 'game'
+        GridLayout:
+            Button:
+                text:"Home Menu"
+                size: 200, 200
+                pos: 7*root.width/9+10, 240
+                on_press:
+                    root.transition.direction = 'right'
+                    root.current = 'main'
+                
+            Button:
+                text:"Quit Game"
+                size: 200, 200
+                pos: 7*root.width/9+10, 20
+                on_press: app.stop()
+        
+            Label:
+                text:"Player 1's turn!"
+                font_size: '30sp'
+                halign: 'right'
+                valign: 'middle'
+                pos: 7*root.width/9+10, 2*root.height/3
+                id: message
+                
+            Label:
+                text:"Human vs. Computer"
+                font_size: '20sp'
+                halign: 'right'
+                valign: 'middle'
+                pos: 7*root.width/9+10, root.height/2
+                id: message
+        TTTGame:
+            id: game
+    
+    
